@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataGlow Dashboard | O Sistema de Organização do seu Glow Up</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Paleta de Cores DataGlowLab */
+            --bg-color: #FFFDF7; /* Creme suave */
+            --primary-color: #D4A5A5; /* Rosa Antigo */
+            --primary-dark: #B58080; /* Tom mais escuro para hover */
+            --text-color: #4A4A4A; /* Cinza escuro suave */
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px; /* Largura controlada para leitura confortável */
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(212, 165, 165, 0.4);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(212, 165, 165, 0.6);
+        }
+
+        .btn-large {
+            font-size: 1.2rem;
+            padding: 20px 50px;
+        }
+
+        /* --- HEADER --- */
+        header {
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            letter-spacing: 2px;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #666;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-img {
+            margin-top: 40px;
+            width: 100%;
+            max-width: 800px;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        
+        .problem {
+            background-color: #F9F3F3;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .problem h2 {
+            margin-bottom: 40px;
+            font-size: 2.2rem;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: left;
+        }
+
+        .problem-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .problem-card i {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        
+        .solution {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .solution h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .solution-desc {
+            max-width: 800px;
+            margin: 0 auto 60px auto;
+            font-size: 1.1rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr; 
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 20px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            border: 1px solid #f0f0f0;
+        }
+
+        .feature-item img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        }
+
+        .feature-item h3 {
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+            color: var(--primary-dark);
+        }
+
+        /* --- PRICING CARD --- */
+        .pricing-section {
+            background: linear-gradient(135deg, #FFFDF7 0%, #FDF2F2 100%);
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .pricing-card {
+            background: var(--white);
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(212, 165, 165, 0.2);
+            border: 2px solid #FBEAEA;
+        }
+
+        .price-old {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 1.2rem;
+            margin-top: 10px;
+        }
+
+        .price-main {
+            font-size: 3.5rem;
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-dark);
+            font-weight: 700;
+            margin: 5px 0;
+        }
+
+        .price-text {
+            font-size: 1rem;
+            margin-bottom: 30px;
+            color: #666;
+        }
+
+        .benefits-list {
+            text-align: left;
+            margin: 30px 0;
+            list-style: none;
+            padding-left: 10px;
+        }
+
+        .benefits-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            font-size: 1.05rem;
+        }
+
+        .benefits-list li i {
+            color: var(--primary-color);
+            margin-right: 12px;
+            font-size: 1.1rem;
+        }
+
+        /* --- FAQ & FOOTER --- */
+        .faq {
+            padding: 80px 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq h2 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .faq-item h4 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer p {
+            color: #999;
+        }
+
+        /* --- CONTACT SECTION --- */
+        .contact-section {
+            padding: 60px 0;
+            text-align: center;
+            background-color: #FFFDF7; 
+            border-top: 1px solid #eee;
+        }
+
+        .contact-section h2 {
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+
+        .contact-desc {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn-contact {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 30px;
+            border: 2px solid var(--primary-color); 
+            border-radius: 50px;
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            background-color: transparent;
+        }
+
+        .btn-contact:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-contact i {
+            font-size: 1.2rem;
+        }
+
+        /* --- RESPONSIVE (CELULAR) --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            
+            /* No celular, a grid vira 1 coluna */
+            .features { grid-template-columns: 1fr; }
+            
+            .pricing-card { padding: 30px; }
+            .btn-large { width: 100%; padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">Data Glow Lab | Planilhas & Rotinas</div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container"> 
+            <h1>O Planejamento que faltava para o seu Glow Up.</h1>
+            <p>Abandone o caos de 10 aplicativos diferentes. Organize finanças, hábitos e metas em um único Dashboard visual.</p>
+            
+            <a href="https://pay.kiwify.com.br/4qKcSrV" class="btn btn-large">Quero Me Organizar Agora</a>
+
+            <img src="img/topo-img.png" alt="DataGlow Dashboard no Notebook" class="hero-img">
+        </div>
+    </section>
+
+    <section class="problem">
+        <div class="container">
+            <h2>Sente que sua vida é um caos organizado?</h2>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <i class="fa-solid fa-wallet"></i>
+                    <h3>Dinheiro Sumindo</h3>
+                    <p>Você começa o mês bem, mas dia 15 já não sabe para onde foi o salário.</p>
+                </div>
+                <div class="problem-card">
+                    <i class="fa-regular fa-calendar-xmark"></i>
+                    <h3>Inconsistência</h3>
+                    <p>Promete novos hábitos de "Glow Up", mas desiste na primeira semana.</p>
+                </div>
+                <div class="problem-card">
+                    <i class="fa-solid fa-brain"></i>
+                    <h3>Sobrecarga Mental</h3>
+                    <p>Tenta usar Notion, agenda de papel e apps, mas nada funciona junto.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="solution">
+        <div class="container">
+            <h2>Conheça o DataGlow Dashboard</h2>
+            <p class="solution-desc">Um laboratório pessoal para desenhar a vida que você deseja. Unimos a potência dos dados com a estética que você ama.</p>
+            
+            <div class="features">
+                <div class="feature-item">
+                    <img src="img/dashboad.png" alt="Dashboard">
+                    <h3>Visão Panorâmica</h3>
+                    <p>Seus saldos, progresso de hábitos e metas em uma única tela visual.</p>
+                </div>
+
+                <div class="feature-item">
+                    <img src="img/financas.png" alt="Finanças">
+                    <h3>Controle Financeiro</h3>
+                    <p>Registre gastos, defina tetos de orçamento e saia do vermelho.</p>
+                </div>
+
+                <div class="feature-item">
+                    <img src="img/habitos.png" alt="Hábitos">
+                    <h3>Habit Tracker</h3>
+                    <p>Acompanhe skincare, treino e leitura com gráficos de consistência.</p>
+                </div>
+                
+                 <div class="feature-item">
+                    <img src="img/wishlist.png" alt="Wishlist">
+                    <h3>Wishlist & Metas</h3>
+                    <p>Mapeie seus sonhos de consumo e veja quanto falta para realizá-los.</p>
+                </div>
+            </div>
+
+             <a href="https://pay.kiwify.com.br/4qKcSrV" class="btn">Ver Oferta Especial</a>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing-section">
+        <div class="container">
+            <div class="pricing-card">
+                <span style="background: #FBEAEA; color: #B58080; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 0.9rem;">OFERTA LIMITADA</span>
+                <h2 style="margin-top: 20px;">DataGlowLab OS Completo</h2>
+                
+                <div class="price-old">De R$ 97,00</div>
+                <div class="price-main">R$ 49,90</div>
+                <p class="price-text">Pagamento único. Acesso vitalício.</p>
+
+                <ul class="benefits-list">
+                    <li><i class="fa-solid fa-check"></i> Dashboard Automático</li>
+                    <li><i class="fa-solid fa-check"></i> Controle Financeiro & Orçamento</li>
+                    <li><i class="fa-solid fa-check"></i> Rastreador de Hábitos</li>
+                    <li><i class="fa-solid fa-check"></i> Planner Semanal & Wishlist</li>
+                </ul>
+
+                <a href="https://pay.kiwify.com.br/4qKcSrV" class="btn btn-large" style="width: 100%;">COMPRAR AGORA</a>
+                
+                <p style="margin-top: 15px; font-size: 0.8rem; color: #888;">🔒 Pagamento 100% Seguro</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq">
+        <div class="container">
+            <h2>Perguntas Frequentes</h2>
+            
+            <div class="faq-item">
+                <h4>Preciso saber Excel avançado?</h4>
+                <p>Não! A planilha é 100% automatizada. Você só preenche os dados básicos e os gráficos aparecem sozinhos.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Funciona no celular?</h4>
+                <p>Sim. Recomendamos usar o app gratuito "Google Planilhas" para acessar e editar seus dados pelo celular onde estiver.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Como recebo o acesso?</h4>
+                <p>Imediatamente após a compra, você receberá um e-mail da Kiwify com o link para baixar seus arquivos e acessar as aulas.</p>
+            </div>
+        </div>
+    </section>
+    <section class="contact-section">
+        <div class="container">
+            <h2>Ainda tem dúvidas?</h2>
+            <p class="contact-desc">Fale diretamente com a nossa equipe. Respondemos rápido!</p>
+            
+            <div class="contact-buttons">
+                <a href="https://instagram.com/SEU_PERFIL_AQUI" target="_blank" class="btn-contact">
+                    <i class="fa-brands fa-instagram"></i>
+                    @dataglowlab
+                </a>
+
+                <a href="mailto:suporte@dataglowlab.com" class="btn-contact">
+                    <i class="fa-regular fa-envelope"></i>
+                    Enviar E-mail
+                </a>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 DataGlowLab. Todos os direitos reservados.</p>
+        </div>
+    
+    </footer>
+
+</body>
+</html>
